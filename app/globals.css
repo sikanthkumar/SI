@@ -1,26 +1,194 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Full wallpaper background */
+.wallpaper {
+  background-image: url("/wallpaper.png");
+  background-size: 105%;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Container */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 150px;
+  flex-wrap: wrap;
+  max-width: 1300px;
+  width: 100%;
+}
+
+/* Left image (document card) */
+.left .doc-img {
+  border-radius: 20px;
+  width: 380px;
+  height: auto;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
+}
+
+.left .doc-img:hover {
+  transform: scale(1.02);
+}
+
+/* Right form card */
+.right {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Headings */
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Form styles */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.label {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 2px;
+  padding-left: 1.25rem;
+}
+
+/* Highlighted input fields */
+.input {
+  padding: 14px 16px 14px 42px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  outline: none;
+  width: 100%;
+  font-size: 16px;
+  background-color: #fff;
+  transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+  background-color: #f0f8ff;
+}
+
+.input:hover {
+  border-color: #007bff;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Terms */
+.terms {
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: left;
+  max-width: 340px;
+}
+
+/* Button */
+.btn {
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #007bff;
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  max-width: 340px;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #0056b3;
+}
+
+/* Social login */
+.social {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.social p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.signin {
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Responsive tweaks */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    gap: 40px;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  .right,
+  .left .doc-img {
+    width: 90%;
+    max-width: 380px;
+  }
 }

@@ -3,10 +3,40 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function Register() {
+export default function RegisterForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("✅ Verification email sent! Please check your inbox.");
+        setName("");
+        setEmail("");
+        setPassword("");
+      } else {
+        alert(`❌ ${data.error || "Something went wrong"}`);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("❌ Server error. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="wallpaper">
@@ -25,15 +55,15 @@ export default function Register() {
         {/* Right side Register Form */}
         <div className="right">
           <h1 className="title">Register</h1>
-          <form className="form">
+          <form className="form" onSubmit={handleSubmit}>
             {/* Name Field */}
             <label className="label">Name</label>
             <div className="input-container">
               <Image
                 src="/user.png"
                 alt="User Icon"
-                width={20}
-                height={20}
+                width={18}
+                height={18}
                 className="input-icon"
               />
               <input
@@ -42,6 +72,7 @@ export default function Register() {
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Enter your name"
                 className="input"
+                required
               />
             </div>
 
@@ -51,8 +82,8 @@ export default function Register() {
               <Image
                 src="/mail.png"
                 alt="Mail Icon"
-                width={20}
-                height={20}
+                width={18}
+                height={18}
                 className="input-icon"
               />
               <input
@@ -61,17 +92,18 @@ export default function Register() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 className="input"
+                required
               />
             </div>
 
-            {/* Password Field */}
+            {/* Password Field (no toggle) */}
             <label className="label">Set Password</label>
             <div className="input-container">
               <Image
                 src="/password.png"
                 alt="Password Icon"
-                width={20}
-                height={20}
+                width={18}
+                height={18}
                 className="input-icon"
               />
               <input
@@ -80,29 +112,20 @@ export default function Register() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter password"
                 className="input"
+                required
               />
             </div>
 
             {/* Terms */}
             <div className="terms">
-              <input type="checkbox" /> I agree to{" "}
+              <input type="checkbox" required /> I agree to{" "}
               <a href="#">Terms and Privacy</a>
             </div>
 
-            <button type="submit" className="btn">
-              Register
+            <button type="submit" className="btn" disabled={loading}>
+              {loading ? "Registering..." : "Register"}
             </button>
           </form>
-
-          {/* Social Login */}
-          <div className="social">
-            <p>or continue with</p>
-            <div className="icons">
-              <Image src="/google.png" alt="Google" width={30} height={30} />
-              <Image src="/facebook.png" alt="Facebook" width={30} height={30} />
-              <Image src="/linkedIn.png" alt="LinkedIn" width={30} height={30} />
-            </div>
-          </div>
 
           <p className="signin">
             Already have an account? <a href="/login">Sign In</a>

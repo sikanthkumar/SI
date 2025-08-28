@@ -6,37 +6,37 @@ body, html {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  height: 100%;
 }
 
-/* Full wallpaper background */
+/* Full wallpaper background - centered layout */
 .wallpaper {
   background-image: url("/wallpaper.png");
-  background-size: 105%;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  margin: 0;
+  justify-content: center;   /* ✅ horizontal center */
+  align-items: center;       /* ✅ vertical center */
+  padding: 20px;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow-y: auto;          /* ✅ scroll if taller */
 }
 
 /* Container */
 .container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 150px;
+  justify-content: center;   /* ✅ center items */
+  gap: 60px;
   flex-wrap: wrap;
-  max-width: 1300px;
+  max-width: 1200px;
   width: 100%;
 }
 
-/* Left image (document card) */
+/* Left image (hidden on mobile) */
 .left .doc-img {
   border-radius: 20px;
   width: 380px;
@@ -49,7 +49,17 @@ body, html {
   transform: scale(1.02);
 }
 
-/* Right form card */
+@media (max-width: 768px) {
+  .left {
+    display: none;  /* ✅ hide image on mobile */
+  }
+  .container {
+    justify-content: center; /* ✅ only card stays centered */
+    gap: 0;
+  }
+}
+
+/* Register card */
 .right {
   background: white;
   padding: 30px;
@@ -60,6 +70,14 @@ body, html {
   flex-direction: column;
   align-items: center;
   box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 600px) {
+  .right {
+    width: 90%;    /* ✅ shrink card on small mobiles */
+    max-width: 360px;
+    padding: 20px;
+  }
 }
 
 /* Headings */
@@ -90,9 +108,9 @@ body, html {
   padding-left: 1.25rem;
 }
 
-/* Highlighted input fields */
+/* Inputs */
 .input {
-  padding: 14px 16px 14px 42px;
+  padding: 14px 16px 14px 42px; /* ✅ space for left icon */
   border-radius: 12px;
   border: 1px solid #ccc;
   outline: none;
@@ -112,6 +130,7 @@ body, html {
   border-color: #007bff;
 }
 
+/* Icon inside input */
 .input-container {
   position: relative;
   width: 100%;
@@ -156,39 +175,9 @@ body, html {
   background: #0056b3;
 }
 
-/* Social login */
-.social {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.social p {
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-.icons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-
+/* Sign-in link */
 .signin {
   margin-top: 15px;
   font-size: 14px;
   text-align: center;
-}
-
-/* Responsive tweaks */
-@media (max-width: 900px) {
-  .container {
-    flex-direction: column;
-    gap: 40px;
-  }
-
-  .right,
-  .left .doc-img {
-    width: 90%;
-    max-width: 380px;
-  }
 }

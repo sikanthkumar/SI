@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -18,18 +19,22 @@ body, html {
   width: 100vw;
   min-height: 100vh;
   display: flex;
-  justify-content: center;   /* ✅ horizontal center */
-  align-items: center;       /* ✅ vertical center */
+  justify-content: center;
+  /* ✅ horizontal center */
+  align-items: center;
+  /* ✅ vertical center */
   padding: 20px;
   box-sizing: border-box;
-  overflow-y: auto;          /* ✅ scroll if taller */
+  overflow-y: auto;
+  /* ✅ scroll if taller */
 }
 
 /* Container */
 .container {
   display: flex;
   align-items: center;
-  justify-content: center;   /* ✅ center items */
+  justify-content: center;
+  /* ✅ center items */
   gap: 60px;
   flex-wrap: wrap;
   max-width: 1200px;
@@ -51,10 +56,13 @@ body, html {
 
 @media (max-width: 768px) {
   .left {
-    display: none;  /* ✅ hide image on mobile */
+    display: none;
+    /* ✅ hide image on mobile */
   }
+
   .container {
-    justify-content: center; /* ✅ only card stays centered */
+    justify-content: center;
+    /* ✅ only card stays centered */
     gap: 0;
   }
 }
@@ -69,12 +77,13 @@ body, html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 600px) {
   .right {
-    width: 90%;    /* ✅ shrink card on small mobiles */
+    width: 90%;
+    /* ✅ shrink card on small mobiles */
     max-width: 360px;
     padding: 20px;
   }
@@ -110,7 +119,8 @@ body, html {
 
 /* Inputs */
 .input {
-  padding: 14px 16px 14px 42px; /* ✅ space for left icon */
+  padding: 14px 16px 14px 42px;
+  /* ✅ space for left icon */
   border-radius: 12px;
   border: 1px solid #ccc;
   outline: none;
@@ -180,4 +190,66 @@ body, html {
   margin-top: 15px;
   font-size: 14px;
   text-align: center;
+}
+
+/* Feedback messages */
+.message {
+  width: 100%;
+  max-width: 340px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.message--success {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.message--error {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.message--info {
+  background: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+}
+
+/* Button disabled state */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Action inside input (e.g., Show/Hide) */
+.input-action {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #555;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.input-action:hover {
+  color: #111;
+}
+
+/* Subtle link */
+.link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
 }

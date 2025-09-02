@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useMemo, useState, type FormEvent, type ChangeEvent } from "react";
+import { User, Mail, Lock } from "lucide-react"; // ✅ default icons
 
 export default function RegisterForm() {
   const [name, setName] = useState("");
@@ -60,7 +60,13 @@ export default function RegisterForm() {
     <div className="wallpaper">
       <div className="container">
         <div className="left">
-          <Image src="/Card.png" alt="Documents" width={400} height={500} className="doc-img" />
+          <img
+            src="/Card.png"
+            alt="Documents"
+            width={400}
+            height={500}
+            className="doc-img"
+          />
         </div>
 
         <div className="right">
@@ -70,9 +76,10 @@ export default function RegisterForm() {
           {error && <div className="message message--error">{error}</div>}
 
           <form className="form" onSubmit={handleSubmit}>
+            {/* Name */}
             <label className="label">Name</label>
             <div className="input-container">
-              <Image src="/user.png" alt="User Icon" width={18} height={18} className="input-icon" />
+              <User className="input-icon" size={18} />
               <input
                 type="text"
                 value={name}
@@ -83,9 +90,10 @@ export default function RegisterForm() {
               />
             </div>
 
+            {/* Email */}
             <label className="label">Email</label>
             <div className="input-container">
-              <Image src="/mail.png" alt="Mail Icon" width={18} height={18} className="input-icon" />
+              <Mail className="input-icon" size={18} />
               <input
                 type="email"
                 value={email}
@@ -96,9 +104,10 @@ export default function RegisterForm() {
               />
             </div>
 
+            {/* Password */}
             <label className="label">Set Password</label>
             <div className="input-container">
-              <Image src="/password.png" alt="Password Icon" width={18} height={18} className="input-icon" />
+              <Lock className="input-icon" size={18} />
               <input
                 type={showPassword ? "text" : "password"}
                 value={password}
@@ -119,7 +128,10 @@ export default function RegisterForm() {
             </div>
 
             <div className="terms">
-              <input type="checkbox" required /> I agree to <a className="link" href="#">Terms and Privacy</a>
+              <input type="checkbox" required /> I agree to{" "}
+              <a className="link" href="#">
+                Terms and Privacy
+              </a>
             </div>
 
             <button type="submit" className="btn" disabled={loading || !isValid}>
@@ -128,7 +140,10 @@ export default function RegisterForm() {
           </form>
 
           <p className="signin">
-            Already have an account? <a className="link" href="/login">Sign in</a>
+            Already have an account?{" "}
+            <a className="link" href="/login">
+              Sign in
+            </a>
           </p>
         </div>
       </div>

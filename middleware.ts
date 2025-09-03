@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { jwtVerify } from "jose";
 
 const PUBLIC_PATHS = [
+    "/",
+    "/contact-us",
     "/login",
     "/register",
     "/verify",
@@ -19,17 +20,9 @@ const PUBLIC_FILES = [
     "/sitemap.xml",
 ];
 
-const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET || "");
-
 async function isAuthenticated(req: NextRequest): Promise<boolean> {
     const token = req.cookies.get("auth_token")?.value;
-    if (!token) return false;
-    try {
-        await jwtVerify(token, JWT_SECRET);
-        return true;
-    } catch {
-        return false;
-    }
+    return Boolean(token);
 }
 
 export async function middleware(req: NextRequest) {
